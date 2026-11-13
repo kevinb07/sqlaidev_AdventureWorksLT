@@ -1,0 +1,8 @@
+CREATE FULLTEXT CATALOG [ProductReviewCatalog]
+    WITH ACCENT_SENSITIVITY = ON
+    AS DEFAULT
+    AUTHORIZATION [dbo];
+
+
+GO
+

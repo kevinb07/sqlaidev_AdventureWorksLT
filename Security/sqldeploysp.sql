@@ -1,0 +1,5 @@
+CREATE USER [sqldeploysp] FOR EXTERNAL PROVIDER;
+
+
+GO
+

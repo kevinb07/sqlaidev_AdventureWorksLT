@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build">
+  <Sdk Name="Microsoft.Build.Sql" Version="2.2.0" />
+  <PropertyGroup>
+    <Name>sqlaidev_AdventureWorksLT</Name>
+    <ProjectGuid>{597A2B11-AD2F-43A6-A70E-5CB03BB51803}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <ModelCollation>1033, CI</ModelCollation>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include=".vscode\tasks.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Dacpacs.Azure.Master" Version="170.0.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Remove="Security/master_key.sql" />
+    <Build Remove="Security/managed_identity.sql" />
+    <Build Remove="ExternalModels/my_embedding_model.sql" />
+    <Build Remove="dbo/StoredProcedures/AskProductQuestion.sql" />
+  </ItemGroup>
+  <Target Name="BeforeBuild">
+    <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
+  </Target>
+</Project>
