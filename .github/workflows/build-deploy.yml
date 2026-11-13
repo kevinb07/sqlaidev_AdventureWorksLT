@@ -1,0 +1,32 @@
+ name: Build and Deploy SQL Database Project
+
+ on:
+   push:
+     branches:
+       - main
+
+ jobs:
+   build-and-deploy:
+     runs-on: ubuntu-latest
+
+     steps:
+       - name: Checkout repository
+         uses: actions/checkout@v4
+
+       - name: Setup .NET SDK
+         uses: actions/setup-dotnet@v4
+         with:
+           dotnet-version: '8.x'
+
+       - name: Build SQL project
+         run: dotnet build DatabaseProjectDWH.sqlproj
+
+       - name: Install SqlPackage
+         run: dotnet tool install -g microsoft.sqlpackage
+
+       - name: Deploy to Azure SQL Database
+         uses: azure/sql-action@v2.3
+         with:
+           connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
+           path: ./bin/Debug/DatabaseProjectDWH.dacpac
+           action: publish
