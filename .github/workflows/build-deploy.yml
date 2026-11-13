@@ -19,7 +19,7 @@
            dotnet-version: '8.x'
 
        - name: Build SQL project
-         run: dotnet build DatabaseProjectDWH.sqlproj
+         run: dotnet build sqlaidev_AdventureWorksLT.sqlproj
 
        - name: Install SqlPackage
          run: dotnet tool install -g microsoft.sqlpackage
@@ -28,5 +28,5 @@
          uses: azure/sql-action@v2.3
          with:
            connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
-           path: ./bin/Debug/DatabaseProjectDWH.dacpac
+           path: ./bin/Debug/sqlaidev_AdventureWorksLT.dacpac
            action: publish
